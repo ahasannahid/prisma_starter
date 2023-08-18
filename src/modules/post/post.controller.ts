@@ -16,7 +16,6 @@ const createPostController = async(req: Request, res: Response) => {
     }
 }
 
-
 const getAllPostController = async(req: Request, res: Response) => {
     console.log(req.query);
     const option = req.query;
@@ -34,8 +33,7 @@ const getAllPostController = async(req: Request, res: Response) => {
     }
 }
 
-
-const getSinglePost = async (req: Request, res: Response) => {
+const getSinglePostController = async (req: Request, res: Response) => {
     try {
         const result =await postService.getSinglePost(parseInt(req.params.id));
         res.send({
@@ -51,8 +49,43 @@ const getSinglePost = async (req: Request, res: Response) => {
 
 
 
+const updatePostController = async(req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const data = req.body;
+    try{
+        const result = await postService.updatePost(id,data);
+        res.send({
+            success: true,
+            message: 'post updated successfully!',
+            data: result
+        })
+    }
+    catch(err){
+        res.send(err);
+    }
+}
+
+const deletePostController = async(req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    try{
+        const result = await postService.deletePost(id);
+        res.send({
+            success: true,
+            message: 'post deleted successfully!',
+            data: result
+        })
+    }
+    catch(err){
+        res.send(err);
+    }
+}
+
+
+
 export const postController = {
     createPostController,
     getAllPostController,
-    getSinglePost
+    getSinglePostController,
+    updatePostController,
+    deletePostController
 }
