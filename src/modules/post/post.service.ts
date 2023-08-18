@@ -16,10 +16,30 @@ const createPost = async(data: Post): Promise<Post> => {
 
 
 const getAllPost = async () => {
-    const result = await prisma.post.findMany();
+    const result = await prisma.post.findMany({
+        include: {
+            author: true,
+            category: true
+        }
+    });
+    return result;
+}
+
+const getSinglePost = async(id:number) => {
+    const result = await prisma.post.findUnique({
+        where: {
+            id
+        },
+        include: {
+            author: true,
+            category: true
+        }
+    });
     return result;
 }
 
 export const postService = {
-    createPost, getAllPost
+    createPost,
+    getAllPost,
+    getSinglePost
 }
