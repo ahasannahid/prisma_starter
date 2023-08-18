@@ -18,8 +18,10 @@ const createPostController = async(req: Request, res: Response) => {
 
 
 const getAllPostController = async(req: Request, res: Response) => {
+    console.log(req.query);
+    const option = req.query;
     try{
-        const result = await postService.getAllPost();
+        const result = await postService.getAllPost(option);
         res.send({
             success: true,
             message: 'post fetched successfully!',
