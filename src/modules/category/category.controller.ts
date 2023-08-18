@@ -6,7 +6,7 @@ const insertIntoDB = async(req: Request, res: Response) => {
         const result = await categoryService.insertIntoDB(req.body);
         res.send({
             success: true,
-            message: 'Category created',
+            message: 'Category created successfully!',
             data: result
         })
     }
@@ -15,6 +15,6 @@ const insertIntoDB = async(req: Request, res: Response) => {
     }
 }
 
-export const categoryContoller = {
+export const categoryController = {
     insertIntoDB
 }
