@@ -17,7 +17,7 @@ const createPostController = async(req: Request, res: Response) => {
 }
 
 const getAllPostController = async(req: Request, res: Response) => {
-    console.log(req.query);
+    // console.log(req.query);
     const option = req.query;
     try{
         const result = await postService.getAllPost(option);
@@ -81,11 +81,27 @@ const deletePostController = async(req: Request, res: Response) => {
 }
 
 
+const learnAggregateAndGrouping = async (req: Request, res: Response) => {
+    console.log(req.body)
+    try {
+        const result = await postService.learnAggregateAndGrouping();
+        res.send({
+            success: true,
+            message: "Result!",
+            data: result
+        })
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+
 
 export const postController = {
     createPostController,
     getAllPostController,
     getSinglePostController,
     updatePostController,
-    deletePostController
+    deletePostController,
+    learnAggregateAndGrouping
 }
